@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid black;
+
+        }
+    </style>
+</head>
+
+<body onload="view()">
+    <main>
+        <div style="float:left; width:50%;">
+            <form id="form">
+                <label>Enter Your Name Here<br></label>
+                <input type="text" id="name" name="name" required>
+
+                <br>
+                <label>Enter Your Password Here<br></label>
+                <input type="password" id="pass" name="password" required>
+                <br>
+                <input id="save" type="button" value="Submit">
+
+            </form>
+        </div>
+            
+       
+            <table id="table">
+                <tr>
+                    <th>Name </th>
+                    <th>Password</th>
+                </tr>
+                 <tr>
+                    <td id="username"></td>
+                    <td id="password"></td>
+                </tr>
+            
+            </table>
+            
+       
+    </main>
+
+    <script>
+        let btn = document.getElementById('save')
+        btn.addEventListener('click', save)
+
+
+        let all_data = JSON.parse(localStorage.getItem('user')) || []
+
+        function save() {
+            let data = {
+                name: document.getElementById('name').value,
+                pass: document.getElementById('pass').value
+            }
+
+            all_data.push(data);
+            window.localStorage.setItem('user', JSON.stringify(all_data));
+            location.reload();
+
+        }
+
+        function view() {
+
+            // var print = all_data.map(display);
+
+            // var result = all_data.map(person => ({ name: person.name, password: person.pass }));
+            // var output = JSON.stringify(result);
+            let arr = JSON.parse(localStorage.getItem('user'))
+            console.log(arr)
+            arr.map(res =>{
+            //   var t = res.name
+                // document.getElementById('password').innerHTML= res.pass
+
+                var x = document.createElement("tr");
+                var y = document.createElement('tr');
+
+                var t = document.createTextNode(res.pass);
+                var u = document.createTextNode(res.name);
+              y.appendChild(u);
+              x.appendChild(t);
+              document.getElementById("username").appendChild(y);
+              document.getElementById("password").appendChild(x);
+            })
+                // var Name = arr.map(res => (res.name));
+                // var Password = arr.map(res => (res.pass));
+                // document.getElementById('username').innerHTML = Name;
+                // document.getElementById('password').innerHTML = Password;
+
+            //  console.log(result)
+            //  console.log(typeof result);
+
+
+            //   var dis = document.getElementById('table');
+            // var newRow = dis.insertRow(row);
+
+            // var cell1 = newRow.insertCell(0) ;
+            // var cell1 = newRow.insertCell(1) ;
+
+
+            // document.getElementById('tab').innerHTML = output;
+
+
+
+
+        }
+
+
+    </script>
+</body>
+
+</html>
